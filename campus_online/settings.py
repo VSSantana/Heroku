@@ -28,10 +28,10 @@ PWA_APP_ORIENTATION = 'any'
 PWA_APP_START_URL = '/?utm_source=homescreen'
 PWA_APP_LANG = 'pt-BR'
 PWA_APP_ICONS = [
-{
-'src': '/static/campus_app/imagens/icone.png',
-'sizes': '160x160'
-}
+    {
+        'src': '/static/campus_app/imagens/icone.png',
+        'sizes': '160x160'
+    }
 ]
 
 # Quick-start development settings - unsuitable for production
@@ -44,7 +44,6 @@ SECRET_KEY = '-xfdzv^&g_&r__1t40vi*5n1t69z!p_5&k50dsr(t6p50k5w5n'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -90,21 +89,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'campus_online.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'campus_online_app',
-        'USER': 'root',
-        'PASSWORD': '5rL51OA9kALUnJgkJYpx',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DB_NAME', 'campus_online_app'),
+        'USER': os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DB_PASS', '123456'),
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -124,7 +121,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -137,7 +133,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
@@ -160,3 +155,7 @@ DEFAULT_FROM_EMAIL = 'Nome <email@gmail.com>'  # utilizado para enviar os e-mail
 # EMAIL_PORT = 587
 
 # CONTACT_EMAIL = ''
+
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
